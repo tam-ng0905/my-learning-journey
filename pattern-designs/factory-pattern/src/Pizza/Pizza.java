@@ -4,8 +4,9 @@ import java.util.*;
 
 public abstract class Pizza {
     String name;
-    String dough;
-    String sauce;
+    //So each of the pizza will have to use the factory-produced ingredients
+    Dough dough;
+    Sauce sauce;
     List<String> toppings = new ArrayList<String>();
     void prepare() {
         for(String topping : toppings){
