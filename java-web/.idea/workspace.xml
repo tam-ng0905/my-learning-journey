@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5e1ec265-5828-4e2d-aced-9b7d7c2b1645" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../hands-on-machine-learning/Calif-housing-price/Housing.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../hands-on-machine-learning/Calif-housing-price/Housing.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hands-on-machine-learning/Calif-housing-price/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../hands-on-machine-learning/Calif-housing-price/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../python-data/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../python-data/main.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1p56eL8wrFFlhA9n0X6PQUODUKr" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.standard" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
+    <property name="project.structure.last.edited" value="Global Libraries" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="Settings.JavaScript.Linters.JSHint" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Tomcat 10.0.2" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.0.2" ALTERNATIVE_JRE_ENABLED="false">
+      <deployment>
+        <artifact name="java-web:war exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="/java_web_war_exploded" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings />
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="java-web:war exploded" />
+        </option>
+      </method>
+    </configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5e1ec265-5828-4e2d-aced-9b7d7c2b1645" name="Default Changelist" comment="" />
+      <created>1614460705090</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1614460705090</updated>
+      <workItem from="1614460707561" duration="10000" />
+    </task>
+    <servers />
+  </component>
+</project>
