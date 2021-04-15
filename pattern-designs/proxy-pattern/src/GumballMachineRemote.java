@@ -1,2 +1,4 @@
-package PACKAGE_NAME;public interface GumballMachineRemote {
+import java.rmi.*;
+
+public interface GumballMachineRemote extends Remote {
 }
