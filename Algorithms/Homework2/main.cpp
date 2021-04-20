@@ -1,13 +1,6 @@
 #include <iostream>
 using namespace std;
 
-
-void printArray(int A[], int size)
-{
-    for (int i = 0; i < size; i++)
-        cout << A[i] << " ";
-}
-
 void merge(int arr[], int p, int q, int r)
 {
     int n1 = q - p + 1;
@@ -55,22 +48,6 @@ void mergeSort(int arr[],int p,int r){
         mergeSort(arr,q+1,r);
         merge(arr,p,q,r);
     }
-}
-
-// Driver code
-int main()
-{
-    int arr[] = { 12, 11, 13, 5, 6, 7 };
-    int arr_size = sizeof(arr) / sizeof(arr[0]);
-
-    cout << "Given array is \n";
-    printArray(arr, arr_size);
-
-    mergeSort(arr, 0, arr_size - 1);
-
-    cout << "\nSorted array is \n";
-    printArray(arr, arr_size);
-    return 0;
 }
 
 
