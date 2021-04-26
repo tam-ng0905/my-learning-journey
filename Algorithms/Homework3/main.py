@@ -1,19 +1,18 @@
-def swap(a, b):
-    temp = a
-    a = b
-    b = temp
-    return a, b
+def swap(array, a, b):
+    temp = array[a]
+    array[a] = array[b]
+    array[b] = temp
 
 
 def partition(A, low, high):
-    pivot = A[len(A) - 1]
+    pivot = A[high]
     split = low - 1
-    j = low
-    for j in range(high - 1):
-        if A[j] <= pivot:
-            split += 1
-            swap(A[split], A[j])
-    swap(A[split + 1], A[high])
+    for j in range(low, high):
+        if A[j] > pivot:
+            continue
+        split = split + 1
+        swap(A, split, j)
+    swap(A, split + 1, high - 1)
     return split + 1
 
 
@@ -26,9 +25,8 @@ def quicksort(A, low, high):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print(swap(5, 8))
-    arr = [10, 8, 12, 2, 6, 102]
+    arr = [10, 8, 12, 2, 6, 102, 122]
     n = len(arr)
-    quicksort(arr, 0, n - 1)
+    quicksort(arr, 0, n-1)
     print(arr)
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
