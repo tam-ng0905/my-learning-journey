@@ -2,31 +2,32 @@ package homework4;
 
 public class bruteForce {
     public static int brute(int[] numbers){
-        int largest_sum = 0;
-        current = 0;
-        for(int i = 0; i < numbers.length; i++){
-            for(int a = i; a < numbers.length; a++){
+        int n = numbers.length;
+        int maximumSubArraySum = Integer.MIN_VALUE;
+        int start = 0;
+        int end = 0;
 
+        for (int i = 0; i < n; i++) {
+
+            int sum = 0;
+
+            for (int a = i; a < n; a++) {
+                sum += numbers[a];
+
+                if (sum > maximumSubArraySum) {
+                    maximumSubArraySum = sum;
+                    start = i;
+                    end = a;
+                }
             }
         }
+        System.out.println(start);
+        System.out.println(end);
+        return maximumSubArraySum;
+    }
+
+    public static void main(String[] args){
+        int[] arr = new int[]{1,-5,6,-1,0,2,5,-7,8,5,5,-5};
+        System.out.println(brute(arr));
     }
 }
-
-def array_max_consecutive_sum(numbers)
-  largest_sum = 0
-          current_sum = 0
-
-          index_one = 0
-          while index_one < numbers.count
-        index_two = index_one
-        while index_two < numbers.count
-        current_sum = numbers[index_one..index_two].reduce(:+)
-        if current_sum > largest_sum
-        largest_sum = current_sum
-        end
-        index_two += 1
-        end
-        index_one += 1
-        end
-        largest_sum
-        end
