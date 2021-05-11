@@ -37,11 +37,8 @@ public class countingSort {
     }
 
     public static void main(String[] args){
-        int[] data = { 4, 2, 2, 8, 3, 3, 1, 10, 12, 9, 2, 44 };
-        int size = data.length;
-        radixSort(data, size);
-//      countSort(data, size);
-        System.out.println("Sorted Array in Ascending Order: ");
-        System.out.println(Arrays.toString(data));
+        int[] arr = { 1, 22, 19, 8, 3, 3, 1, 10, 12, 9, 2, 44 };
+        int size = arr.length;
+        radixSort(arr, size);
     }
 }
