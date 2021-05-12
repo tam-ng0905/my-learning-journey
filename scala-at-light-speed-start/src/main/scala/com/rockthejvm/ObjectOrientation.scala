@@ -1,6 +1,8 @@
 package com.rockthejvm
 
 object ObjectOrientation extends App{
+
+  //`extends App` is equivalent to Java as: public static void main(String[] args)
   class Animal{
     val age: Int = 0
     def eat() = println("I'm eating")
@@ -66,4 +68,61 @@ object ObjectOrientation extends App{
   MySingleton.mySpecialMethod()
   MySingleton.apply(432)
   MySingleton(432)
+
+
+  //companion object - because they share the same name with the class
+  object Animal {
+    val canLiveIndefinitely = false
+  }
+  val animalsCanLiveForever = Animal.canLiveIndefinitely //"static" filed/methods
+
+  //case classes -- lightweight data structures with some boilerplate
+  //- sensible equals and hash code
+  //- serialization
+  //- companion with apply
+  //-pattern matching
+  case class Person(name: String, age: Int)
+
+  //may be constructed without `new` keyword
+  val bob = Person("Bob", 52)
+
+  //exceptions
+  try {
+    //code that can throw
+    val x: String = null
+    x.length
+  } catch { // catch(exception e) {..}
+    case e: Exception => "Some faulty error message"
+  } finally{
+    //execute some coed no matter what
+  }
+
+  //Generics
+  abstract class MyList[T]{
+    def head: T
+    def tail: MyList[T]
+  }
+
+  //using a generic with a concrete type
+  val aList: List[Int] = List(1,2,3) //List.apply(1,2,3)
+  val first = aList.head //int
+  val rest = aList.tail
+
+  val aStringList = List("Hello", "Scala")
+  val firstString = aStringList.head //string
+
+
+  //Point 1: in Scala we usually operate with IMMUTABLE values/objects
+  //Any modification to an object must return ANOTHER object
+
+  /*
+    Benefit:
+  1) works miracles in multithread env
+  2) helps making sense of the code ("resoning about")
+   */
+  val reverseList = aList.reverse // returns a New list
+
+  //Point 2: Scala is closest to the OO ideal
+
+
 }
