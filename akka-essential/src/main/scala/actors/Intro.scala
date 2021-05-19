@@ -53,6 +53,6 @@ object Intro extends App{
 
 //  val Person = actorSystem.actorOf(Props(new Person("Bob")))
   //use the companion
-  val Person = actorSystem.actorOf(Person.props("Bob"))
-  Person ! ("hi")
+  val person = actorSystem.actorOf(Person.props("Bob"))
+  person ! "jo"
 }
