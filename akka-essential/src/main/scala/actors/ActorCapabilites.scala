@@ -59,4 +59,14 @@ object ActorCapabilites extends App{
   case class WirelessPhoneMessage(content: String, ref: ActorRef)
   alice ! WirelessPhoneMessage
 
+
+
+  /*
+    Exercises
+    1. a counter actor
+
+   */
+
+
+
 }
