@@ -15,7 +15,7 @@ object ActorCapabilites extends App{
       case SendMessageToYourself(content) =>
         self ! content
       case SayHiTo(ref) => ref ! "Hi!"
-      case WirelessPhoneMessage(content, ref) => ref forward content(content + "s") // i keep the original sender of the WPM
+//      case WirelessPhoneMessage(content, ref) => ref forward content(content + "s") // i keep the original sender of the WPM
     }
   }
 

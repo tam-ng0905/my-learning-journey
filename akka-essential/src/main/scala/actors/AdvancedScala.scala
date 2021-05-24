@@ -40,7 +40,7 @@ object AdvancedScala extends App{
   //type aliases
   type ReceiveFunction = PartialFunction[Any, Unit]
   def receive: ReceiveFunction = {
-    case => println("hello")
+    case hi => println("hello")
     case _ => println("confused...")
   }
 
