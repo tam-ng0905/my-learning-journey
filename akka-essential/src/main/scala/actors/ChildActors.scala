@@ -64,5 +64,20 @@ object ChildActors extends App{
   /*Actor selection
 
    */
+  val childSelection = system.actorSelection("/user/parent/child")
+  childSelection ! "I found you"
+
+  /**
+   * Danger !!!
+   * NEVER PASS MUTABLE ACTOR STATE, OR THE `THIS` REFERENCE, TO CHILD ACTORS
+   *
+   *
+   *TODO: `closing over`
+   */
+
+  /*
+  TODO: ALL THE INTERACTION WITH ACTOR HAVE TO GO THROUGH `MESSAGE`, NEVER THROUGH CALLING METHOD
+   */
+
 
 }
