@@ -1,5 +1,7 @@
 package actors
 
+import scala.concurrent.Future
+
 object AdvancedScala extends App{
   //partial functions
 
@@ -74,4 +76,25 @@ object AdvancedScala extends App{
 
 
 
+
+
+  val aThread = new Thread(() => println("I'm running in parallel"))
+
+
+  class BankAccount(@volatile private var amount: Int){
+    override def toString: String = "" + amount
+
+    def withdraw(money: Int) = this.amount -= money
+    def safeWithdraw(money: Int) = this.synchronized{
+      this.amount -= money
+    }
+  }
+
+  val future = Future {
+    34
+  }
+  future.onComplete{
+    case Success(43) => println("I found the meaning of life")
+    case Failure(_) => println("something happened with the meaning of life!!!")
+  }
 }
