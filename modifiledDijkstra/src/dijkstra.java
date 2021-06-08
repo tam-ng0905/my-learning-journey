@@ -1,17 +1,31 @@
+import javax.xml.soap.Node;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
 public class dijkstra {
+    private PriorityQueue<Node> queue;
+    static class Node{
+        private Character key;
+        private float value;
+
+        public Node(Character key, float value) {
+            this.key = key;
+            this.value = value;
+        }
+        public String toString(){
+            return key + " " + value;
+        }
+    }
     static class Graph{
 //        private int vertices;
-        private LinkedList<Character> list;
+        private LinkedList<Node> list;
 
         Graph() {
 //            this.vertices = vertices;
-            this.list = new LinkedList<Character>();
+            this.list = new LinkedList<Node>();
         }
-        void addVertice(Character v){
+        void addVertice(Node v){
             this.list.add(v);
         }
         public String toString(){
@@ -30,10 +44,11 @@ public class dijkstra {
                 char[] ln = line.toCharArray();
                 char first = ln[0];
                 Graph adList = new Graph();
-                adList.addVertice(first);
+
+                adList.addVertice(new Node(first, 0));
                 for(int i = 1; i < ln.length; i++) {
-                    if(!Character.isDigit(ln[i])){
-                        adList.addVertice(ln[i]);
+                    if(!Character.isDigit(ln[i]) && Character.isDigit(ln[i+1])){
+                        adList.addVertice(new Node(ln[i], (float) (ln[i + 1])));
                     }
                 }
                 lines.add(adList);
@@ -44,5 +59,8 @@ public class dijkstra {
             input.close();
         }
         input.close();
+
+
+        queue = new PriorityQueue<Node>(V, new Node());
     }
 }
