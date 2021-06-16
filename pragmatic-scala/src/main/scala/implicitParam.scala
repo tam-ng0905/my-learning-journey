@@ -1,6 +1,6 @@
 package org.pragmatic.scala
 
-class implicitPara {
+object implicitParam extends App{
   class Wifi(name: String){
     override def toString: String = name
   }
@@ -8,7 +8,7 @@ class implicitPara {
     println(s"User: $user connected to WIFI $wifi")
   }
 
-  def atOffice() = {
+  def atOffice(): Unit = {
     println("---At office---")
 
     implicit def officeNetwork: Wifi = new Wifi("office-network")
@@ -19,11 +19,14 @@ class implicitPara {
     connectToNetwork("Jill Coder")
   }
 
-  def atJoesHome() = {
+  def atJoesHome(): Unit = {
     println("---at Joe's home---")
     implicit def homeNetwork: Wifi = new  Wifi("home-network")
 
     connectToNetwork("guest")(homeNetwork)
     connectToNetwork("Joe Hacker")
   }
+
+  atOffice()
+  atJoesHome()
 }
