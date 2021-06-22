@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String
 from .database import Base
 
-
+# for sqlalchemy
 class Blog(Base):
     __tablename__ = 'blogs'
 
