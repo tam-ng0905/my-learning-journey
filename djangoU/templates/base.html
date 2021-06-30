@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ month_name }} Challenge</title>
+    <title>{% block page_title %}My Challenges{% endblock %}</title>
+    {% block css_files %}{% endblock %}
 </head>
 <body>
-
+        <h1>All Challenges</h1>
+        {% block content %}{% endblock %}
 </body>
 </html>
