@@ -1,57 +1,47 @@
 #include <stdio.h>
-int parse_command(char *inp, int *argc){
+int parse_command(char *inp, int *argc, char *argv[]){
     int i = 0;
-    printf("%d\n", argc);
+    int a = 0;
     while(inp[i]){
         if(i == 0){
             ++*argc;
+            argv[a] = &inp[i];
+            printf("%c\n", *argv[a]);
+            a++;
         }
-        if(inp[i] == ' ') {
+        if(inp[i] == ' ' && inp[i+1]) {
             ++*argc;
-            printf("%d\n", *argc);
+//            printf("%d\n", *argc);
+//            argv[]
+            argv[a] = &inp[i+1];
+            printf("%c\n", *argv[a]);
+            a++;
         }
-        printf("%c\n", inp[i]);
+//        printf("%c\n", inp[i]);
         i++;
     }
 
     return 0;
 };
 
+void print_cmd_line(char *argv[], int *argc) {
+    int i;
+    for (i = 0; i < *argc; i++) {
+        printf("%s\n",argv[i]);
+    }
+}
+
 
 
 int main() {
-//    char str[6] = "hello";
-//    char * argv = str;
-//    int * argc = 0;
-//    printf("%c\n", parse_command("hello world", argc, &argv));
-//    int arr[3]= {1,2,3};
-//    int *p = arr;
-//    int a = 5;
-//    int * b = &a;
-//    printf("%d", b);
-//    printf("a - %d", &a);
-
-//    char * test = "Hello World Hello Again";
-//    char c = 'Z';
-//    char a[] = "Hello World";
-
-//    printf("%c\n", &c);
-//
-//    char *ptr1 = &c;
-//    char *ptr2 = &a[0];
-//    printf("%c\n", *ptr1);
-//    printf("%c\n", *ptr2);
 
     char test[] = "Hello World";
+    char * argv[100];
     char * first = &test[0];
-//    printf("%lu\n", sizeof(test));
-//    printf("%lu\n", sizeof(first));
     int arg = 0;
     int * argc = &arg;
-    parse_command(first, argc);
 
-//    for(int i = 0; i < *test; i++ ){
-//        printf("%c", test[i]);
-//    }
+    parse_command(first, argc, argv);
+    print_cmd_line(argv, argc);
     return 0;
 }
