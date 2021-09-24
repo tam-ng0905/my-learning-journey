@@ -24,6 +24,16 @@ int parse_command(char *inp, int *argc, char *argv[]){
     return 0;
 };
 
+char *itoa(int value, char *str, int base){
+
+};
+
+
+void printany(void *para){
+
+}
+
+
 void print_cmd_line(char *argv[], int *argc) {
     int i;
     for (i = 0; i < *argc; i++) {
@@ -31,6 +41,14 @@ void print_cmd_line(char *argv[], int *argc) {
     }
 }
 
+
+typedef struct {
+    unsigned short limit_0_15; // bits 0 (lowest order) to 15 of limit unsigned short base_0_15; // bits 0 to 15 of base
+    unsigned char base_16_23; // bits 16 to 23 of base
+    unsigned char limit_and_flag; // bits 16 to 19 of limit and 0 to 3 of
+    flag
+    unsigned char base_24_31; // bits 24 to 31 of base
+} DESC;
 
 
 int main() {
