@@ -6,7 +6,7 @@ int parse_command(char *inp, int *argc, char *argv[]){
         if(i == 0){
             ++*argc;
             argv[a] = &inp[i];
-            printf("%c\n", *argv[a]);
+//            printf("%c\n", *argv[a]);
             a++;
         }
         if(inp[i] == ' ' && inp[i+1]) {
@@ -14,7 +14,7 @@ int parse_command(char *inp, int *argc, char *argv[]){
 //            printf("%d\n", *argc);
 //            argv[]
             argv[a] = &inp[i+1];
-            printf("%c\n", *argv[a]);
+//            printf("%c\n", *argv[a]);
             a++;
         }
 //        printf("%c\n", inp[i]);
@@ -42,6 +42,8 @@ int main() {
     int * argc = &arg;
 
     parse_command(first, argc, argv);
+    printf("%c\n",*argv[0]);
+    printf("%c\n",*argv[1]);
     print_cmd_line(argv, argc);
     return 0;
 }
