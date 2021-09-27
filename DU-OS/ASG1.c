@@ -1,23 +1,35 @@
 #include <stdio.h>
+
 //Question 1
 int parse_command(char *inp, int *argc, char *argv[]){
     int i = 0;
     int a = 0;
+    int wordCount = 1;
+    char * str = &inp[0];
+    ++*argc;
+    argv[0] = &inp[0];
+//    printf("Here 1");
     while(inp[i]){
-        if(i == 0){
+//        printf("Here 2");
+//        while(inp[i] != ' '){
+//            str[a] = inp[i];
+//            a++;
+//        }
+//        printf("Here 3");
+        if(inp[i] == ' ' && inp[i+1]){
+            argv[wordCount] = str;
+            wordCount++;
+            a = 0;
+            str = &inp[i+1];
             ++*argc;
-            argv[a] = &inp[i];
-            a++;
-        }
-        if(inp[i] == ' ' && inp[i+1]) {
-            ++*argc;
-            argv[a] = &inp[i+1];
-            a++;
         }
         i++;
     }
+    printf("%d\n", *argc);
+
     return 0;
 };
+
 void print_cmd_line(char *argv[], int *argc) {
     int i;
     for (i = 0; i < *argc; i++) {
@@ -27,7 +39,7 @@ void print_cmd_line(char *argv[], int *argc) {
 
 
 //Question 2
-char* reverseStr(char* str, int len){
+char* reverseString(char* str, int len){
     int i = 0;
     int j = 0;
 
@@ -82,9 +94,8 @@ char *itoa(int value, char *str, int base){
     }
     str[count] = '\0';
 
-    return reverseStr(string1, count);
+    return reverseString(string1, count);
 }
-
 
 //Question 3
 enum dataTypes{intType, shortType, charType, floatType, doubleType, unsignedType, longType, unsignedCharType, unsignedIntType, unsignedShortType, unsignedLongType, longDoubleType};
@@ -131,10 +142,9 @@ void populate_desc(int base, int limit, int flag, DESC *g){
     g->base_24_31 = (0xFF000000 & base) >> 24;
 }
 
-
 int main() {
 
-    char test[] = "Hello World";
+    char * test = "Hello World";
     char * argv[100];
     char * first = &test[0];
     int arg = 0;
@@ -143,10 +153,14 @@ int main() {
     parse_command(first, argc, argv);
     print_cmd_line(argv, argc);
 
-    printf("%s\n",itoa(-1512, &test1, 10));
+
+
+//    printf("%s\n",itoa(51222, &test1, 16));
+
+
 
     short test2 = 1232;
-    printany(&test2, shortType);
+//    printany(&test2, shortType);
 
     return 0;
 }
