@@ -73,18 +73,33 @@ char *itoa(int value, char *str, int base){
     return reverseStr(string1, count);
 };
 
-void printany(void *para){
+enum dataTypes{intType, charType, floatType, doubleType, unsignedType, longType};
 
+void printany(void * pointer, enum dataTypes paramType){
+    if(paramType == intType){
+        printf("%d\n",  * ((int*)pointer));
+    } else if(paramType == charType){
+        printf("%c\n", * ((char*)pointer));
+    }
 }
 
 typedef struct {
-    unsigned short limit_0_15; // bits 0 (the lowest order) to 15 of limit unsigned short base_0_15; // bits 0 to 15 of base
+    unsigned short limit_0_15; // bits 0 (the lowest order) to 15 of limit
+    unsigned short base_0_15; // bits 0 to 15 of base
     unsigned char base_16_23; // bits 16 to 23 of base
     unsigned char limit_and_flag; // bits 16 to 19 of limit and 0 to 3 of flag
     unsigned char base_24_31; // bits 24 to 31 of base
+
 } DESC;
 
 void populate_desc(int base, int limit, int flag, DESC *g){
+    g->limit_0_15 = 0x00007FFF & limit;
+    g->base_0_15 = 0x00007FFF & base;
+
+    g->limit_and_flag = ((0x000F0000 & limit) >>> 12) | (0x7 & flag);
+
+    g->base_16_23 = (0x00FF0000 & base) >>> 16;
+    g->base_24_31 = (0xFF000000 & base) >>> 24;
 
 }
 
@@ -97,7 +112,8 @@ int main() {
     int arg = 0;
     int * argc = &arg;
     char test1;
-
+    char test2 = 'H';
+    printany(&test2, charType);
 //    parse_command(first, argc, argv);
 //    printf("%c\n",*argv[0]);
 //    print_cmd_line(argv, argc);
