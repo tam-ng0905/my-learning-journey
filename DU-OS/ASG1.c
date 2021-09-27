@@ -1,4 +1,5 @@
 #include <stdio.h>
+//Question 1
 int parse_command(char *inp, int *argc, char *argv[]){
     int i = 0;
     int a = 0;
@@ -17,7 +18,6 @@ int parse_command(char *inp, int *argc, char *argv[]){
     }
     return 0;
 };
-
 void print_cmd_line(char *argv[], int *argc) {
     int i;
     for (i = 0; i < *argc; i++) {
@@ -25,6 +25,8 @@ void print_cmd_line(char *argv[], int *argc) {
     }
 }
 
+
+//Question 2
 char* reverseStr(char* str, int len){
     int i = 0;
     int j = 0;
@@ -48,12 +50,19 @@ char* reverseStr(char* str, int len){
     return str;
 }
 char *itoa(int value, char *str, int base){
-
-    char* string1 = str;//(char*) malloc(100 * (sizeof(char)));
-//    char* string2; //= (char*) malloc(100 * (sizeof(char)));
+    int8_t addNegative = 0;
+    char* string1 = str;
+    char* string2;
     int count = 0;
     char * hexNum = "ABCDEF";
-    printf("%d", count);
+
+    if(value < 0){
+        value = value * -1;
+
+        if(base == 10){
+            addNegative = 1;
+        }
+    }
     while(value > 0 ){
         if(base <= 10){
             str[count] = (value % base) + '0';
@@ -67,22 +76,43 @@ char *itoa(int value, char *str, int base){
         value = value/base;
         count++;
     }
+    if( addNegative == 1){
+        str[count] = '-';
+        count ++;
+    }
     str[count] = '\0';
 
-
     return reverseStr(string1, count);
-};
+}
 
-enum dataTypes{intType, charType, floatType, doubleType, unsignedType, longType};
 
+//Question 3
+enum dataTypes{intType, shortType, charType, floatType, doubleType, unsignedType, longType, unsignedCharType, unsignedIntType, unsignedShortType, unsignedLongType, longDoubleType};
 void printany(void * pointer, enum dataTypes paramType){
     if(paramType == intType){
         printf("%d\n",  * ((int*)pointer));
     } else if(paramType == charType){
         printf("%c\n", * ((char*)pointer));
+    } else if(paramType == doubleType){
+        printf("%f\n", * ((double*)pointer));
+    } else if(paramType == floatType){
+        printf("%f\n", * ((float*)pointer));
+    } else if(paramType == longType){
+        printf("%ld\n", * ((long*)pointer));
+    } else if(paramType == shortType){
+        printf("%hd\n", * ((short*)pointer));
+    } else if(paramType == unsignedIntType){
+        printf("%u\n", * ((unsigned int*)pointer));
+    } else if(paramType == unsignedLongType){
+        printf("%lu\n", * ((unsigned long*)pointer));
+    } else if(paramType == unsignedShortType){
+        printf("%u\n", * ((unsigned short*)pointer));
+    } else if(paramType == unsignedType){
+        printf("%u\n", * ((unsigned*)pointer));
     }
 }
 
+//Question 4
 typedef struct {
     unsigned short limit_0_15; // bits 0 (the lowest order) to 15 of limit
     unsigned short base_0_15; // bits 0 to 15 of base
@@ -91,16 +121,14 @@ typedef struct {
     unsigned char base_24_31; // bits 24 to 31 of base
 
 } DESC;
-
 void populate_desc(int base, int limit, int flag, DESC *g){
     g->limit_0_15 = 0x00007FFF & limit;
     g->base_0_15 = 0x00007FFF & base;
 
-    g->limit_and_flag = ((0x000F0000 & limit) >>> 12) | (0x7 & flag);
+    g->limit_and_flag = ((0x000F0000 & limit) >> 16) | ((0x7 & flag) << 4);
 
-    g->base_16_23 = (0x00FF0000 & base) >>> 16;
-    g->base_24_31 = (0xFF000000 & base) >>> 24;
-
+    g->base_16_23 = (0x00FF0000 & base) >> 16;
+    g->base_24_31 = (0xFF000000 & base) >> 24;
 }
 
 
@@ -112,12 +140,13 @@ int main() {
     int arg = 0;
     int * argc = &arg;
     char test1;
-    char test2 = 'H';
-    printany(&test2, charType);
-//    parse_command(first, argc, argv);
-//    printf("%c\n",*argv[0]);
-//    print_cmd_line(argv, argc);
+    parse_command(first, argc, argv);
+    print_cmd_line(argv, argc);
 
-    printf("%s\n",itoa(512, &test1, 16));
+    printf("%s\n",itoa(-1512, &test1, 10));
+
+    short test2 = 1232;
+    printany(&test2, shortType);
+
     return 0;
 }

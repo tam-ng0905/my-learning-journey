@@ -17,7 +17,7 @@ char* reverseStr(char* str, int len){
         j++;
     }
 
-    while(i < j){
+    while(i < j ){
         temp = *start;
         *start = *end;
         *end = temp;
