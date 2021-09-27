@@ -5,7 +5,9 @@ int parse_command(char *inp, int *argc, char *argv[]){
     int i = 0;
     int a = 0;
     int wordCount = 1;
-    char * str = &inp[0];
+    char str = inp[0];
+    printf("%c\n", inp[0]);
+    printf("%c\n", str);
     ++*argc;
     argv[0] = &inp[0];
 //    printf("Here 1");
@@ -17,14 +19,16 @@ int parse_command(char *inp, int *argc, char *argv[]){
 //        }
 //        printf("Here 3");
         if(inp[i] == ' ' && inp[i+1]){
-            argv[wordCount] = str;
+            argv[wordCount] = &str;
             wordCount++;
+
             a = 0;
             str = &inp[i+1];
             ++*argc;
         }
         i++;
     }
+    printf("%s", argv[0]);
     printf("%d\n", *argc);
 
     return 0;
