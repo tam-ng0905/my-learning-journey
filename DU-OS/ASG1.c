@@ -4,33 +4,31 @@
 int parse_command(char *inp, int *argc, char *argv[]){
     int i = 0;
     int a = 0;
-    int wordCount = 1;
-    char str = inp[0];
-    printf("%c\n", inp[0]);
-    printf("%c\n", str);
-    ++*argc;
-    argv[0] = &inp[0];
-//    printf("Here 1");
+    int wordCount = 0;
+    char * str;
     while(inp[i]){
-//        printf("Here 2");
-//        while(inp[i] != ' '){
-//            str[a] = inp[i];
-//            a++;
-//        }
-//        printf("Here 3");
-        if(inp[i] == ' ' && inp[i+1]){
-            argv[wordCount] = &str;
-            wordCount++;
-
-            a = 0;
-            str = &inp[i+1];
+        if(inp[i] && inp[i] != ' '){
+            str[i] = inp[i];
+            if(inp[i - 1] == ' '){
+                argv[*argc] = &str[i];
+//                wordCount++;
+                ++*argc;
+            }
+        }
+        if(inp[i] == ' '){
+            str[i] = '\0';
+        }
+        if(inp[i] != ' ' && i == 0){
+            argv[*argc] = &str[i];
+//            wordCount = 1;
             ++*argc;
         }
         i++;
     }
-    printf("%s", argv[0]);
+    argv = &str;
+//    argc = &wordCount;
+//    printf("%d\n", wordCount);
     printf("%d\n", *argc);
-
     return 0;
 };
 
@@ -148,23 +146,25 @@ void populate_desc(int base, int limit, int flag, DESC *g){
 
 int main() {
 
-    char * test = "Hello World";
+    char * test = "Hello World Here Here";
+    char test1;
     char * argv[100];
     char * first = &test[0];
     int arg = 0;
+
     int * argc = &arg;
-    char test1;
     parse_command(first, argc, argv);
+//    printf("%d\n", argc);
     print_cmd_line(argv, argc);
 
 
 
-//    printf("%s\n",itoa(51222, &test1, 16));
+    printf("%s\n",itoa(51222, &test1, 16));
 
 
 
     short test2 = 1232;
-//    printany(&test2, shortType);
+    printany(&test2, shortType);
 
     return 0;
 }
