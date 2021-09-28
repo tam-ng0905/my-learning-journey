@@ -3,33 +3,28 @@
 //Question 1
 int parse_command(char *inp, int *argc, char *argv[]){
     int i = 0;
-    int a = 0;
-    int wordCount = 0;
-    char * str;
     while(inp[i]){
-        if(inp[i] && inp[i] != ' '){
-            str[i] = inp[i];
-            if(inp[i - 1] == ' '){
-                argv[*argc] = &str[i];
-//                wordCount++;
-                ++*argc;
-            }
-        }
-        if(inp[i] == ' '){
-            str[i] = '\0';
-        }
-        if(inp[i] != ' ' && i == 0){
-            argv[*argc] = &str[i];
-//            wordCount = 1;
+
+
+        if(inp[i] == ' ' && inp[i + 1]){
+            argv[*argc] = &inp[i+1];
             ++*argc;
         }
+        if(inp[i] != ' ' && i == 0){
+            argv[*argc] = &inp[i];
+            ++*argc;
+        }
+
+         if(inp[i] == ' '){
+            inp[i] = '\0';
+        }
+
         i++;
     }
-    argv = &str;
-//    argc = &wordCount;
-//    printf("%d\n", wordCount);
+
+    argv = &inp;
     printf("%d\n", *argc);
-    return 0;
+    return *argc;
 };
 
 void print_cmd_line(char *argv[], int *argc) {
@@ -64,7 +59,7 @@ char* reverseString(char* str, int len){
     return str;
 }
 char *itoa(int value, char *str, int base){
-    int8_t addNegative = 0;
+    int addNegative = 0;
     char* string1 = str;
     char* string2;
     int count = 0;
@@ -138,7 +133,7 @@ void populate_desc(int base, int limit, int flag, DESC *g){
     g->limit_0_15 = 0x00007FFF & limit;
     g->base_0_15 = 0x00007FFF & base;
 
-    g->limit_and_flag = ((0x000F0000 & limit) >> 16) | ((0x7 & flag) << 4);
+    g->limit_and_flag = ((0x000F0000 & limit) >> 16) | ((0xF & flag) << 4);
 
     g->base_16_23 = (0x00FF0000 & base) >> 16;
     g->base_24_31 = (0xFF000000 & base) >> 24;
@@ -146,19 +141,27 @@ void populate_desc(int base, int limit, int flag, DESC *g){
 
 int main() {
 
-    char * test = "Hello World Here Here";
+//    char * test = "Hello World Here Here";
     char test1;
-    char * argv[100];
-    char * first = &test[0];
-    int arg = 0;
-
-    int * argc = &arg;
-    parse_command(first, argc, argv);
-//    printf("%d\n", argc);
-    print_cmd_line(argv, argc);
-
+//    char * argv[100];
+//    char * first = &test[0];
+//    int arg = 0;
+//
+//    int * argc = &arg;
+//    printf("%d\n", parse_command(first, argc, argv));
+//    print_cmd_line(argv, argc);
 
 
+
+    char words[] = "Hello World Here Here";
+
+    //argument/word count
+    int argc = 0;
+    //max of 20 word pointers allowed
+    char* argv[255];
+
+    parse_command(words, &argc, argv);
+    print_cmd_line(argv, &argc);
     printf("%s\n",itoa(51222, &test1, 16));
 
 
