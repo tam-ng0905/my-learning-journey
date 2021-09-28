@@ -23,7 +23,6 @@ int parse_command(char *inp, int *argc, char *argv[]){
     }
 
     argv = &inp;
-    printf("%d\n", *argc);
     return *argc;
 };
 
@@ -140,29 +139,17 @@ void populate_desc(int base, int limit, int flag, DESC *g){
 }
 
 int main() {
-
-//    char * test = "Hello World Here Here";
-    char test1;
-//    char * argv[100];
-//    char * first = &test[0];
-//    int arg = 0;
-//
-//    int * argc = &arg;
-//    printf("%d\n", parse_command(first, argc, argv));
-//    print_cmd_line(argv, argc);
-
-
-
     char words[] = "Hello World Here Here";
-
     //argument/word count
     int argc = 0;
     //max of 20 word pointers allowed
     char* argv[255];
-
     parse_command(words, &argc, argv);
     print_cmd_line(argv, &argc);
-    printf("%s\n",itoa(51222, &test1, 16));
+
+
+    char test1;
+    printf("%s\n",itoa(512, &test1, 16));
 
 
 
