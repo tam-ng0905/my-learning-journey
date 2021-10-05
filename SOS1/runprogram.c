@@ -117,14 +117,19 @@ __attribute__((fastcall)) void switch_to_user_process(PCB *p) {
 
 	// TODO: load EDI, ESI, EAX, EBX, EDX, EBP with values from
     	// process p's PCB
-    asm volatile ("movl %0, %%EDI\n": :"m"(p.cpu.edi))
-    asm volatile ("movl %0, %%ESI\n": :"m"(p.cpu.esi))
-    asm volatile ("movl %0, %%EAX\n": :"m"(p.cpu.eax))
-    asm volatile ("movl %0, %%EBX\n": :"m"(p.cpu.edx))
+    asm volatile ("movl %0, %%EDI\n": :"m"(p->cpu.edi))
+    asm volatile ("movl %0, %%ESI\n": :"m"(p->cpu.esi))
+    asm volatile ("movl %0, %%EAX\n": :"m"(p->cpu.eax))
+    asm volatile ("movl %0, %%EBX\n": :"m"(p->cpu.edx))
 	// TODO: Push into stack the following values from process p's PCB: SS,
     	// ESP, EFLAGS, CS, EIP (in this order)
-    asm volatile
+    asm volatile ("pushl %0\n": :"m"(p->cpu.ss))
+    asm volatile ("pushl %0\n": :"m"(p->cpu.esp))
+    asm volatile ("pushl %0\n": :"m"(p->cpu.eflags))
+    asm volatile ("pushl %0\n": :"m"(p->cpu.cs))
+    asm volatile ("pushl %0\n": :"m"(p->cpu.eip))
 	// TODO: load ECX with value from process p's PCB
+    asm volatile ("movl %0, %%EBX\n": :"m"(p->cpu.ecx))
 
 	// TODO: load ES, DS, FS, GS registers with user data segment selector
 
