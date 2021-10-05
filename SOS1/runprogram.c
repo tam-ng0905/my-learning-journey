@@ -20,7 +20,6 @@ PCB *current_process; // should point to user_program before control transfer
 void run(uint32_t LBA, uint32_t n_sectors) {
 	uint8_t *load_base = NULL;
 	uint32_t bytes_needed;
-
 	// request memory: we need n_sectors*512 bytes for program code;
 	// we will ask for 16KB more for the user-mode and kernel-mode stacks
 	bytes_needed = n_sectors*512+16384;
@@ -29,22 +28,24 @@ void run(uint32_t LBA, uint32_t n_sectors) {
 		puts("run: Not enough memory.\n");
 		return;
 	}
-
 	// load the program into memory
 	if (!load_disk_to_memory(LBA,n_sectors,load_base)) {
 		puts("run: Load error.\n");
 		return;
 	}
- 	
     	// Save some state information about the console in its PCB
     	// so that we return back here; the PCB of the console is defined
     	// in the beginning of this file; the PCB structure is defined in
     	// kernel_only.h.
     
 	// TODO: Save flags in the console's PCB
+	console.cpu.eflags = current_process->cpu.eflags;
+
 	
 	// TODO: Save current stack pointers (ESP and EBP) in the console's PCB
-	
+	console.cpu.esp = current_process->cpu.esp;
+	console.cpu.ebp = current_process->cpu.ebp;
+
 	// save resume point: we will resume at forward label 1 (below)
 	asm volatile ("movl $1f,%0" : "=r"(console.cpu.eip));
 	
@@ -58,6 +59,9 @@ void run(uint32_t LBA, uint32_t n_sectors) {
     	//          e) code segment (CS)
     	//          f) instruction pointer (EIP)
     	//          g) flags (EFLAGS)
+
+    user_program->memory_base = current_process->memory_base;
+
 
 
 	current_process = &user_program;
@@ -104,7 +108,7 @@ __attribute__((fastcall)) void switch_to_user_process(PCB *p) {
 	// we will use the last 4KB of the process address space
 	TSS.ss0 = 0x10; // must be kernel data segment with RPL=0
     	// TODO: set TSS.esp0 
-
+    TSS.esp0 =
 	// set up GDT entries 3 and 4
 	// TODO: set user GDT code/data segment to base = p->memory_base,
 	// limit = p->memory_limit, flag, and access byte (see kernel_only.h
@@ -113,10 +117,13 @@ __attribute__((fastcall)) void switch_to_user_process(PCB *p) {
 
 	// TODO: load EDI, ESI, EAX, EBX, EDX, EBP with values from
     	// process p's PCB
-    
+    asm volatile ("movl %0, %%EDI\n": :"m"(p.cpu.edi))
+    asm volatile ("movl %0, %%ESI\n": :"m"(p.cpu.esi))
+    asm volatile ("movl %0, %%EAX\n": :"m"(p.cpu.eax))
+    asm volatile ("movl %0, %%EBX\n": :"m"(p.cpu.edx))
 	// TODO: Push into stack the following values from process p's PCB: SS,
     	// ESP, EFLAGS, CS, EIP (in this order)
-
+    asm volatile
 	// TODO: load ECX with value from process p's PCB
 
 	// TODO: load ES, DS, FS, GS registers with user data segment selector
