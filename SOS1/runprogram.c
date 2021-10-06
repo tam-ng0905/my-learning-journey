@@ -37,11 +37,8 @@ void run(uint32_t LBA, uint32_t n_sectors) {
     	// so that we return back here; the PCB of the console is defined
     	// in the beginning of this file; the PCB structure is defined in
     	// kernel_only.h.
-    
 	// TODO: Save flags in the console's PCB
 	console.cpu.eflags = current_process->cpu.eflags;
-
-	
 	// TODO: Save current stack pointers (ESP and EBP) in the console's PCB
 	console.cpu.esp = current_process->cpu.esp;
 	console.cpu.ebp = current_process->cpu.ebp;
@@ -60,9 +57,13 @@ void run(uint32_t LBA, uint32_t n_sectors) {
     	//          f) instruction pointer (EIP)
     	//          g) flags (EFLAGS)
 
-    user_program->memory_base = current_process->memory_base;
-
-
+    user_program.memory_base = *load_base;
+    user_program.memory_limit = *load_base + bytes_needed;
+    user_program.cpu.ss = (0x4 << 3) | 0x3;
+    user_program.cpu.cs = (0x3 << 3) | 0x3;
+    user_program.cpu.eip = bytes_needed - 4096;
+    user_program.cpu.eflags = current_process->cpu.eflags;
+//    user_program.cpu.esp = *load_base;
 
 	current_process = &user_program;
 	switch_to_user_process(current_process);
@@ -121,6 +122,7 @@ __attribute__((fastcall)) void switch_to_user_process(PCB *p) {
     asm volatile ("movl %0, %%ESI\n": :"m"(p->cpu.esi))
     asm volatile ("movl %0, %%EAX\n": :"m"(p->cpu.eax))
     asm volatile ("movl %0, %%EBX\n": :"m"(p->cpu.edx))
+
 	// TODO: Push into stack the following values from process p's PCB: SS,
     	// ESP, EFLAGS, CS, EIP (in this order)
     asm volatile ("pushl %0\n": :"m"(p->cpu.ss))
