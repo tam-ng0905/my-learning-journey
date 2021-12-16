@@ -11,20 +11,22 @@ def DFS(start):
     MAX = start
     visited[start] = True
     for v in graph[start]:
-        if not visited[v]:
+        if not visited[v] and start < v:
             path[v] = start
             if v > MAX:
                 MAX = v
             DFS(v)
+        else:
+            break
 
 
 for i in range(m):
     u, v = map(int, input().split())
-    graph[u].append(v)
-    graph[v].append(u)
+    if u < v:
+        graph[u].append(v)
+        # graph[v].append(u)
 
-s = 1
-
+# print(graph)
 # TODO: ASK ABOUT WHY THIS LOOP RIGHT HERE
 for i in range(n):
     # visited[i] = False
