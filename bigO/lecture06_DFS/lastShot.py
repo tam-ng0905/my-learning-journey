@@ -1,40 +1,40 @@
+import sys
+sys.setrecursionlimit(1e6)
 n, m = map(int, input().split())
 
 graph = [[] for i in range(n + 1)]
 visited = [False for a in range(n + 1)]
-path = [-1 for j in range(n + 1)]
 MAX = 1
 
+cnt = 0
 
 def DFS(start):
     global MAX
-    MAX = start
+    global cnt
+    cnt += 1
+    if cnt > MAX:
+        MAX = cnt
     visited[start] = True
     for v in graph[start]:
-        if not visited[v] and start < v:
-            path[v] = start
-            if v > MAX:
-                MAX = v
+        if not visited[v]:
             DFS(v)
-        else:
-            break
 
 
 for i in range(m):
     u, v = map(int, input().split())
-    if u < v:
-        graph[u].append(v)
-        # graph[v].append(u)
+    graph[u].append(v)
+    # graph[v].append(u)
 
 # print(graph)
-# TODO: ASK ABOUT WHY THIS LOOP RIGHT HERE
-for i in range(n):
+for i in range(1, n + 1):
     # visited[i] = False
-    # path[i] = -1
+    for a in range(n + 1):
+        visited[a] = False
+    cnt = 0
     DFS(i)
+    # path[i] = -1
 
-# DFS(s)
+# DFS(1)
 
-print(visited)
-print(path)
+# print(visited)
 print(MAX)
