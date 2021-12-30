@@ -1,27 +1,39 @@
 package controllers;
 
+import models.Book;
 
 import play.mvc.*;
+import java.util.Set;
+import javax.inject.Inject;
 /*
 
  */
-
+import views.html.books.*;
 public class BooksController extends Controller{
+
+    @inject
+    FormFactory formFactory;
 
 
     // for all books
     public Result index(){
-        return TODO;
+        Set<Book> books = Book.allBooks();
+        return ok(index.render(books));
     }
 
     // to create new books
     public Result create(){
-        return TODO;
+        Form<Book> bookForm = formFactory.form(Book.class);
+        return ok(create.render(bookForm));
     }
 
     // to save book
     public Result save(){
-        return TODO;
+        Form<Book> bookForm = formFactory.form(Book.class).bindFromRequest();
+        Book book = bookForm.get();
+        Book.add(book);
+        return redirect(routers.BooksController.index());
+
     }
 
     public Result edit(Integer id){

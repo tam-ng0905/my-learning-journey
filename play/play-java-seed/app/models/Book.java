@@ -1,11 +1,17 @@
 package models;
 
+
+import java.util.Set;
+
 public class Book {
     public Integer id;
     public String title;
     public Integer price;
     public String author;
 
+    public Book(){
+
+    }
 
     public Book(Integer id, String title, Integer price, String author) {
         this.id = id;
