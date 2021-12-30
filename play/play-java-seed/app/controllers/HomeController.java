@@ -2,7 +2,9 @@ package controllers;
 
 import play.mvc.*;
 import views.html.*;
+import play.libs.Json;
 import java.time.LocalDate;
+import java.util.HashMap;
 
 /**
  * This controller contains an action to handle HTTP requests
@@ -22,6 +24,16 @@ public class HomeController extends Controller {
 
     public Result hello() {
         return ok(views.html.hello.render("Today is "+LocalDate.now()));
+    };
+
+    public Result returnMap(){
+        HashMap<String, Object> result = new HashMap<String, Object>(){
+            {
+                put("attendes", 15);
+                put("when", "In a day off!!!!");
+            }
+        };
+        return ok(Json.toJson(result));
     }
 
 }
