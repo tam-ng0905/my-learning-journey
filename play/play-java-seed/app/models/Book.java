@@ -1,9 +1,13 @@
 package models;
 
-
+import java.util.HashSet;
 import java.util.Set;
+import com.avaje.ebean.Model;
 
-public class Book {
+
+@Entity
+public class Book extends Model  {
+    @Id
     public Integer id;
     public String title;
     public Integer price;
