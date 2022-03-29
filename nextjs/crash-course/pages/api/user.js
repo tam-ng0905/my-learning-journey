@@ -9,7 +9,6 @@ export default async (req, res) => {
             return
         }
         const {token} = cookie.parse(req.headers.cookie);
-        console.log(token);
         const result = await fetch(`${API_URL}/auth/current`, {
             method: "POST",
             headers: {
@@ -21,7 +20,6 @@ export default async (req, res) => {
             })
         });
         const user = await result.json();
-        console.log(user);
         // if (res.ok){
             res.status(200).json({user})
         // } else {
